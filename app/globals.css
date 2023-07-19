@@ -8,6 +8,21 @@ body {
   background-color: rgba(250, 250, 250, 0.315);
 }
 
+*::-webkit-scrollbar {
+  display: block;
+  background: transparent;
+  width: 5px;
+  height: 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(37, 56, 75);
+  background-color: #bbccdd;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
