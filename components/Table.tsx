@@ -31,10 +31,7 @@ export function TableUI() {
             </button>
           </div>
 
-          <Link
-            className="col-span-11 grid grid-cols-12"
-            href={"/dashboard/inbox/32"}
-          >
+          <Link className="col-span-11 grid grid-cols-12" href={"/inbox/32"}>
             <div className="col-span-3">Lucas Kriebel (via Twitter) (2)</div>
             <div className="col-span-8">
               Sltr-haris Type IV physeal fx upper end of l tibia, sequela –
