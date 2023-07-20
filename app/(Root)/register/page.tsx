@@ -118,7 +118,7 @@ export default function RegisterPage({}: Props) {
             </button>
           </div>
           <div className=" text-xs flex justify-center items-center mt-12">
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <Link
               className="pl-2 text-blue-500 font-semibold underline"
               href={"/"}

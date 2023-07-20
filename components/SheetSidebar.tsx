@@ -46,7 +46,7 @@ export function SheetSidebar({ button }: sheetBadType) {
           </Link>
         </SheetClose>
         {navItem.map((navItem, indx) => (
-          <SheetClose asChild>
+          <SheetClose key={indx} asChild>
             {/* <div
               key={indx}
               className={cn(
