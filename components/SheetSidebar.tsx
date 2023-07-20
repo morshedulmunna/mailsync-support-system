@@ -33,7 +33,7 @@ export function SheetSidebar({ button }: sheetBadType) {
   return (
     <Sheet>
       <SheetTrigger asChild>{button}</SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-y-scroll">
         <SheetClose asChild>
           <Link className="w-full mt-5" href={"/inbox/compose"}>
             <Button
