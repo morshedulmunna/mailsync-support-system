@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { Editor } from "react-draft-wysiwyg";
 
 type Props = {};
 
@@ -28,22 +27,10 @@ export default function Compose({}: Props) {
   };
 
   return (
-    <div className="p-6 overflow-y-auto h-full">
+    <div className="p-6 overflow-hidden  ">
       <form action="">
         {/* Email */}
-        <div className="bg-white p-4 rounded mb-4">
-          <label className="text-sm pb-1 block" htmlFor="email">
-            Email Address
-          </label>
-          <Input
-            type="text"
-            id="email"
-            className="outline-none focus:outline-none placeholder:text-gray-300"
-            placeholder="example@gmail.com"
-          />
-        </div>
 
-        {/* Email */}
         <div className="bg-white p-4 rounded">
           <label className="text-sm pb-1  block" htmlFor="email">
             Subject
@@ -75,32 +62,36 @@ export default function Compose({}: Props) {
           </Select>
         </div>
         {/* Text Box */}
-        <div className="mt-6 bg-white">
-          <Editor
-            placeholder="Write your problem........."
-            editorState={editorState}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName border border-1 border-soft-dark mb-3 rounded"
-            editorClassName="editorClassName px-2 pt-0"
-            editorStyle={{ minHeight: "200px" }}
-            onEditorStateChange={onEditorStateChange}
-          />
+        <div className="bg-white p-4 rounded mt-4">
+          <label className="text-sm pb-1  block" htmlFor="email">
+            Problem Details
+          </label>
+          <textarea
+            className="border w-full text-sm p-2 rounded outline-none"
+            placeholder="Write your problem Details......."
+            name="description"
+            id=""
+            cols={20}
+            rows={10}
+          ></textarea>
         </div>
 
-        <div className="space-x-4 float-right mt-4">
-          <Button
-            className="px-12 bg-blue-500 hover:bg-blue-500/80"
-            type="submit"
-          >
-            Draft
-          </Button>
+        <div className="mt-6 bg-white rounded">
+          <div className="space-x-4  float-right mt-4">
+            <Button
+              className="px-12 bg-blue-500 hover:bg-blue-500/80"
+              type="submit"
+            >
+              Draft
+            </Button>
 
-          <Button
-            className="px-12 bg-red-500 hover:bg-red-500/80 "
-            type="submit"
-          >
-            Send
-          </Button>
+            <Button
+              className="px-12 bg-red-500 hover:bg-red-500/80 "
+              type="submit"
+            >
+              Send
+            </Button>
+          </div>
         </div>
       </form>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import EmailTopBar from "@/components/EmailTopBar";
 import PageTitle from "@/components/PageTitle";
 import { SheetSidebar } from "@/components/SheetSidebar";
 import Sidebar from "@/components/Sidebar";
@@ -38,10 +39,13 @@ export default function DashboardLayout({ children }: Props) {
             </div>
           </div>
 
-          <main className="pl-1 pb-5 bg-gray-200/20 rounded-r lg:shadow h-full  w-full">
-            {children}
+          <main className=" h-full  bg-gray-200/20 rounded-r lg:shadow overflow-hidden flex flex-col justify-between   w-full">
+            <div className="px-6 pt-6">
+              <EmailTopBar />
+            </div>
+            <div className="overflow-y-scroll h-full">{children}</div>
             <footer>
-              <nav className="bg-gray-100 rounded-b-[10px] flex justify-center items-center">
+              <nav className="bg-gray-100  flex justify-center items-center">
                 <div className="text-xs space-x-2 py-2 text-gray-500">
                   <span>Copyright © {date.getFullYear()} mailSyncs.com</span>
                   <span className="italic text-[10px]">

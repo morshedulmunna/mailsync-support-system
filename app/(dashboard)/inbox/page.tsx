@@ -1,4 +1,3 @@
-import EmailTopBar from "@/components/EmailTopBar";
 import EmailTypes from "@/components/EmailTypes";
 import { TableUI } from "@/components/Table";
 import Link from "next/link";
@@ -7,9 +6,7 @@ type Props = {};
 
 export default function Inbox({}: Props) {
   return (
-    <div className="p-6 overflow-y-auto h-full">
-      <EmailTopBar />
-
+    <div className=" px-6 overflow-y-auto h-full">
       <div className="mb-6 bg-white p-4 w-full rounded">
         <EmailTypes types={"Unread"} take={1} skip={20} />
         <TableUI />
