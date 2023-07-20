@@ -7,8 +7,10 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import {
+  Inbox,
   MailCheck,
   MailWarning,
+  Mails,
   MenuSquare,
   MessagesSquare,
   Settings,
@@ -23,28 +25,37 @@ type Props = {};
 
 const navItem = [
   {
-    icon: <MessagesSquare size={18} />,
+    icon: <MessagesSquare size={16} />,
     level: "Inbox",
     href: "/inbox",
   },
-
   {
-    icon: <MailCheck size={18} />,
+    icon: <Mails size={16} />,
+    level: "Unread",
+    href: "/unread",
+  },
+  {
+    icon: <Inbox size={16} />,
+    level: "Important",
+    href: "/important",
+  },
+  {
+    icon: <MailCheck size={16} />,
     level: "Sent Mail",
     href: "/sent-mail",
   },
   {
-    icon: <MenuSquare size={18} />,
+    icon: <MenuSquare size={16} />,
     level: "Draft",
     href: "/draft",
   },
   {
-    icon: <MailWarning size={18} />,
+    icon: <MailWarning size={16} />,
     level: "Spam",
     href: "/spam",
   },
   {
-    icon: <Trash2 size={18} />,
+    icon: <Trash2 size={16} />,
     level: "Trash",
     href: "/trash",
   },
@@ -105,15 +116,15 @@ export default function Sidebar({}: Props) {
                 )}
                 href={navItem.href}
               >
-                <div className="flex text-sm items-center space-x-2">
+                <div className="flex text-sm font-medium items-center space-x-2">
                   {navItem.icon}
                   <span>{navItem.level}</span>
                 </div>
                 <span
                   className={cn(
-                    "block  text-white  rounded px-1 text-[10px]",
-                    navItem.level === "Dashboard" && "hidden",
-                    pathname === navItem.href && "bg-red-500/50"
+                    "block  text-black bg-gray-200/50  rounded px-1 text-[10px]",
+                    // navItem.level === "Dashboard" && "hidden",
+                    pathname === navItem.href && "bg-red-500/50 text-white"
                   )}
                 >
                   12

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -30,7 +31,7 @@ export default function Compose({}: Props) {
     <div className="pb-20 m-2  bg-white h-full p-4 rounded">
       <form action="">
         {/* Email */}
-        <label className="text-base pb-1 block" htmlFor="email">
+        <label className="text-sm pb-1 block" htmlFor="email">
           Email Address
         </label>
         <Input
@@ -41,7 +42,7 @@ export default function Compose({}: Props) {
         />
 
         {/* Email */}
-        <label className="text-base pb-1 mt-4 block" htmlFor="email">
+        <label className="text-sm pb-1 mt-4 block" htmlFor="email">
           Subject
         </label>
         <Input
@@ -52,20 +53,21 @@ export default function Compose({}: Props) {
         />
 
         {/* Category */}
-        <div className="mt-4 ">
-          <label htmlFor="select" className="text-base pb-1 block">
-            Category
-          </label>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
+        <label className="text-sm pb-1 mt-4 block" htmlFor="email">
+          Category
+        </label>
+        <Select>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="programming">Programming</SelectItem>
+              <SelectItem value="server-issue">Server Issue</SelectItem>
+              <SelectItem value="coding-problem">Coding Problem</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         {/* Text Box */}
         <div className="mt-6">
           <Editor

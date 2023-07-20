@@ -1,5 +1,8 @@
+"use client";
+
 import PageTitle from "@/components/PageTitle";
 import Sidebar from "@/components/Sidebar";
+import { usePathname } from "next/navigation";
 import React from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -8,13 +11,12 @@ type Props = {
 };
 
 export default function DashboardLayout({ children }: Props) {
+  const pathName = usePathname();
+
   return (
     <div className=" px-2  lg:container pb-20 pt-8 lg:overflow-hidden w-full h-full">
       <PageTitle
-        breadCrumbItems={[
-          { label: "Email", path: "/apps/email/compose" },
-          { label: "Compose Email", path: "/apps/email/compose", active: true },
-        ]}
+        breadCrumbItems={[{ label: "mailSyncs", path: `${pathName}` }]}
         title={"Compose Email"}
       />
       <div className="  lg:flex  w-full h-full">
