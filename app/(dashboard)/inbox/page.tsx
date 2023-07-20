@@ -7,7 +7,7 @@ type Props = {};
 
 export default function Inbox({}: Props) {
   return (
-    <div className="py-2 mt-4 lg:px-2 overflow-y-auto h-full">
+    <div className="p-6 overflow-y-auto h-full">
       <EmailTopBar />
 
       <div className="mb-6 bg-white p-4 w-full rounded">

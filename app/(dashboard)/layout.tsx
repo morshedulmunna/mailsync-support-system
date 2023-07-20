@@ -17,7 +17,7 @@ export default function DashboardLayout({ children }: Props) {
   const date = new Date();
 
   return (
-    <div className="h-screen ">
+    <div className="h-screen bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50">
       <div className=" px-2 lg:container pb-20 pt-8 lg:overflow-hidden w-full h-full">
         <PageTitle
           breadCrumbItems={[{ label: "mailSyncs", path: `${pathName}` }]}

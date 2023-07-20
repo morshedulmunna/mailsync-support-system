@@ -15,11 +15,11 @@ export default function EmailTypes({ types, take, skip }: Props) {
           Showing <span>{take}</span> - <span>{skip}</span> of <span>100</span>
         </p>
         <div className="pl-4 ">
-          <button className="bg-white text-black shadow-sm  hover:bg-gray-100/80 duration-200 ease-linear px-1 rounded-l-[2px]">
+          <button className="bg-white text-black shadow-sm  hover:bg-gray-100/80 duration-200 ease-linear px-1 rounded-l-[4px] border border-gray-100">
             <ChevronLeft size={18} />
           </button>
-          <button className="bg-red-500 hover:bg-red-500/80 duration-200 ease-linear px-1 rounded-r-[2px]">
-            <ChevronRight size={18} color="white" />
+          <button className="bg-red-500 hover:bg-red-500/80 duration-200 ease-linear text-white border border-gray-100 px-1 rounded-r-[4px]">
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>
