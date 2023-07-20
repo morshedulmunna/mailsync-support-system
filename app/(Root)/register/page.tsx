@@ -1,4 +1,6 @@
+import { logo } from "@/assets";
 import { Lock, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {};
@@ -8,7 +10,9 @@ export default function RegisterPage({}: Props) {
     <>
       <div className="h-[100vh] bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50 flex justify-center items-center">
         <div className="bg-gradient-to-bl from-lime-50/70 overflow-hidden via-sky-50/70 bg-opacity-20 to-cyan-50/70 shadow-sm rounded-md px-6 md:px-12 lg:px-20 m-4 py-6  w-fit lg:w-1/2 2xl:w-[30%]    border">
-          <div className="text-center mb-12">Logo Here</div>
+          <div className="text-center mb-12 flex justify-center items-center">
+            <Image src={logo} alt="logo" />
+          </div>
           <div className=" flex justify-between items-center ">
             <div className=" w-full ">
               <div>

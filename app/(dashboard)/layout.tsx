@@ -21,7 +21,6 @@ export default function DashboardLayout({ children }: Props) {
       <div className=" px-2 lg:container pb-20 pt-8 lg:overflow-hidden w-full h-full">
         <PageTitle
           breadCrumbItems={[{ label: "mailSyncs", path: `${pathName}` }]}
-          title={"Compose Email"}
         />
         <div className="  lg:flex  w-full h-full">
           <div className="w-full lg:w-60 p-6 shadow bg-white rounded-l ">

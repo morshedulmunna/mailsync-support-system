@@ -1,4 +1,6 @@
+import { logo } from "@/assets";
 import { Lock, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {};
@@ -6,7 +8,9 @@ type Props = {};
 export default function Login({}: Props) {
   return (
     <div className="bg-gradient-to-bl from-lime-50/70 overflow-hidden via-sky-50/70 bg-opacity-20 to-cyan-50/70 shadow-sm rounded-md px-24 m-4 py-6   w-fit    border">
-      <div className="text-center mb-12">Logo Here</div>
+      <div className="text-center mb-12 flex justify-center items-center">
+        <Image src={logo} alt="logo" />
+      </div>
       <div className=" flex justify-between items-center ">
         <div className=" w-full ">
           <div>

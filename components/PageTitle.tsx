@@ -1,3 +1,6 @@
+import { logo } from "@/assets";
+import Image from "next/image";
+
 type Props = {
   breadCrumbItems: (
     | {
@@ -10,14 +13,15 @@ type Props = {
         active: boolean;
       }
   )[];
-  title: string;
 };
 
-export default function PageTitle({ breadCrumbItems, title }: Props) {
+export default function PageTitle({ breadCrumbItems }: Props) {
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="mb-2 text-blue-500/50 italic text-sm">{title}</div>
+        <div className="mb-2 text-blue-500/50  text-lg">
+          <Image src={logo} alt="logo" />
+        </div>
         <div>
           {breadCrumbItems.map((each, index) => (
             <div className="mb-2 text-blue-500/50 text-sm" key={index}>
