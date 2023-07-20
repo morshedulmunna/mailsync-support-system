@@ -1,6 +1,3 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-
 type Props = {
   children: React.ReactNode;
 };
@@ -8,9 +5,8 @@ type Props = {
 export default function MainLayout({ children }: Props) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="">{children}</main>
-      <Footer />
     </>
   );
 }

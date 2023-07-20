@@ -23,7 +23,7 @@ import { Button } from "./ui/button";
 
 type Props = {};
 
-const navItem = [
+export const navItem = [
   {
     icon: <MessagesSquare size={16} />,
     level: "Inbox",
@@ -75,7 +75,7 @@ export default function Sidebar({}: Props) {
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full ">
       {pathname === "/inbox/compose" ? (
         <Link href={"/inbox"}>
           <Button
@@ -99,7 +99,7 @@ export default function Sidebar({}: Props) {
       )}
 
       {/* Mene Item */}
-      <div className="">
+      <div>
         <ul>
           {navItem.map((navItem, indx) => (
             <li
