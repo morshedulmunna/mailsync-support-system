@@ -10,7 +10,7 @@ type Props = {};
 
 export default function EmailTopBar({}: Props) {
   return (
-    <div className="flex  justify-between space-x-4">
+    <div className="flex flex-col md:flex-row justify-between lg:space-x-4">
       <div className="w-full flex justify-start items-center space-x-4">
         <div className="w-fit sticky -top-6 shadow-sm bg-white  py-2 px-4 rounded mb-4 flex justify-start items-center space-x-8">
           <span className="cursor-pointer text-gray-500 hover:text-red-500 w-fit">
@@ -36,7 +36,7 @@ export default function EmailTopBar({}: Props) {
 
       <Input
         type="search"
-        className="w-full text-sm h-9"
+        className="w-full text-sm h-9 mb-4"
         placeholder="Search....."
       />
     </div>

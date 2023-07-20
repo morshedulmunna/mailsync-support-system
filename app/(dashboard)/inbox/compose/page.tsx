@@ -27,7 +27,7 @@ export default function Compose({}: Props) {
   };
 
   return (
-    <div className="pb-20 bg-white h-full p-4 rounded">
+    <div className="pb-20 m-2  bg-white h-full p-4 rounded">
       <form action="">
         {/* Email */}
         <label className="text-base pb-1 block" htmlFor="email">

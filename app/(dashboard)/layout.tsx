@@ -9,7 +9,7 @@ type Props = {
 
 export default function DashboardLayout({ children }: Props) {
   return (
-    <div className=" px-2  lg:container pb-20 pt-12 lg:overflow-hidden w-full h-full">
+    <div className=" px-2  lg:container pb-20 pt-8 lg:overflow-hidden w-full h-full">
       <PageTitle
         breadCrumbItems={[
           { label: "Email", path: "/apps/email/compose" },
@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: Props) {
           <Sidebar />
         </div>
 
-        <main className="pl-1 bg-gray-200/20 rounded-r lg:shadow  w-full">
+        <main className="pl-1 pb-5 bg-gray-200/20 rounded-r lg:shadow  w-full">
           {children}
         </main>
       </div>
