@@ -28,55 +28,61 @@ export default function Compose({}: Props) {
   };
 
   return (
-    <div className="pb-20 m-2  bg-white h-full p-4 rounded">
+    <div className="p-6 overflow-y-auto h-full">
       <form action="">
         {/* Email */}
-        <label className="text-sm pb-1 block" htmlFor="email">
-          Email Address
-        </label>
-        <Input
-          type="text"
-          id="email"
-          className="outline-none focus:outline-none placeholder:text-gray-300"
-          placeholder="example@gmail.com"
-        />
+        <div className="bg-white p-4 rounded mb-4">
+          <label className="text-sm pb-1 block" htmlFor="email">
+            Email Address
+          </label>
+          <Input
+            type="text"
+            id="email"
+            className="outline-none focus:outline-none placeholder:text-gray-300"
+            placeholder="example@gmail.com"
+          />
+        </div>
 
         {/* Email */}
-        <label className="text-sm pb-1 mt-4 block" htmlFor="email">
-          Subject
-        </label>
-        <Input
-          type="text"
-          id="email"
-          className="outline-none focus:outline-none placeholder:text-gray-300"
-          placeholder="Typing Subject"
-        />
+        <div className="bg-white p-4 rounded">
+          <label className="text-sm pb-1  block" htmlFor="email">
+            Subject
+          </label>
+          <Input
+            type="text"
+            id="email"
+            className="outline-none focus:outline-none placeholder:text-gray-300"
+            placeholder="Typing Subject"
+          />
+        </div>
 
         {/* Category */}
-        <label className="text-sm pb-1 mt-4 block" htmlFor="email">
-          Category
-        </label>
-        <Select>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="programming">Programming</SelectItem>
-              <SelectItem value="server-issue">Server Issue</SelectItem>
-              <SelectItem value="coding-problem">Coding Problem</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <div className="bg-white p-4 rounded mt-4">
+          <label className="text-sm pb-1  block" htmlFor="email">
+            Category
+          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="programming">Programming</SelectItem>
+                <SelectItem value="server-issue">Server Issue</SelectItem>
+                <SelectItem value="coding-problem">Coding Problem</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
         {/* Text Box */}
-        <div className="mt-6">
+        <div className="mt-6 bg-white">
           <Editor
             placeholder="Write your problem........."
             editorState={editorState}
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName border border-1 border-soft-dark mb-3 rounded"
             editorClassName="editorClassName px-2 pt-0"
-            editorStyle={{ minHeight: "300px" }}
+            editorStyle={{ minHeight: "200px" }}
             onEditorStateChange={onEditorStateChange}
           />
         </div>
