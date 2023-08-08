@@ -26,7 +26,7 @@ export default function RegisterPage({}: Props) {
       email: values.email,
       password: values.password,
     };
-    dispatch(register(object));
+    // dispatch(register(object));
   };
 
   return (
