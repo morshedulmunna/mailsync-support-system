@@ -2,14 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
 
 type Props = {};
@@ -30,37 +22,35 @@ export default function Compose({}: Props) {
     <div className="p-6 overflow-hidden  ">
       <form action="">
         {/* Email */}
-
-        <div className="bg-white p-4 rounded">
+        <div className="bg-white p-4 mb-5 rounded">
           <label className="text-sm pb-1  block" htmlFor="email">
-            Subject
+            Email Address
           </label>
           <Input
             type="text"
             id="email"
+            name="email"
+            className="outline-none focus:outline-none placeholder:text-gray-300"
+            placeholder="Typing Subject"
+          />
+        </div>
+        {/* Email */}
+
+        <div className="bg-white p-4 rounded">
+          <label className="text-sm pb-1  block" htmlFor="subject">
+            Subject
+          </label>
+          <Input
+            type="text"
+            id="subject"
+            name="subject"
             className="outline-none focus:outline-none placeholder:text-gray-300"
             placeholder="Typing Subject"
           />
         </div>
 
         {/* Category */}
-        <div className="bg-white p-4 rounded mt-4">
-          <label className="text-sm pb-1  block" htmlFor="email">
-            Category
-          </label>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="programming">Programming</SelectItem>
-                <SelectItem value="server-issue">Server Issue</SelectItem>
-                <SelectItem value="coding-problem">Coding Problem</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+
         {/* Text Box */}
         <div className="bg-white p-4 rounded mt-4">
           <label className="text-sm pb-1  block" htmlFor="email">

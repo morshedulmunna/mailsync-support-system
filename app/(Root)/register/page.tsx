@@ -1,11 +1,34 @@
+"use client";
 import { logo } from "@/assets";
-import { Lock, Mail } from "lucide-react";
+import { useRegisterMutation } from "@/redux/auth/authApi";
+import { registerUserSchema } from "@/types";
+import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 type Props = {};
 
 export default function RegisterPage({}: Props) {
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
+  const dispatch = useDispatch();
+  const [register, { data, error, isLoading }] = useRegisterMutation();
+
+  console.log(data);
+
+  const handleSubmit = (values: FormikValues) => {
+    const object = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+    dispatch(register(object));
+  };
+
   return (
     <>
       <div className="h-[100vh] bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50 flex justify-center items-center">
@@ -16,96 +39,98 @@ export default function RegisterPage({}: Props) {
           <div className=" flex justify-between items-center ">
             <div className=" w-full ">
               <div>
-                <h5 className="text-base font-medium">Welcome Back!</h5>
+                <h5 className="text-xl font-medium">Welcome Back!</h5>
                 <p className="text-xs  leading-5 my-2">
                   Enter your email address and password to Register your account
                   and access admin panel.
                 </p>
               </div>
-              <form className="text-gray-700" action="">
-                {/* Email Filed */}
-                <div className="mt-6">
-                  <label
-                    className="text-xs font-medium mb-1 block"
-                    htmlFor="email"
-                  >
-                    Email Address
-                  </label>
-                  <div className="flex">
-                    <div className="py-[7px] px-4 bg-white border rounded-l">
-                      <Mail size={18} color="#9b9b9b" />
-                    </div>
-                    <input
+
+              {/*  */}
+              <Formik
+                initialValues={initialValues}
+                validationSchema={registerUserSchema}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  {/* Full Name */}
+                  <div className="flex flex-col mb-2">
+                    <label htmlFor="name">Full Name </label>
+                    <Field
+                      className="border outline-none px-1 text-sm py-2 rounded"
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Jon Do"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs"
+                      name="name"
+                      component="div"
+                    />
+                  </div>
+
+                  {/* Email address */}
+                  <div className="flex flex-col mb-2">
+                    <label htmlFor="email">Email Address</label>
+                    <Field
+                      className="border outline-none px-1 text-sm py-2 rounded"
                       type="text"
                       id="email"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      placeholder="example@gmail.com"
-                      className="border w-full placeholder:text-xs px-2 text-xs py-[7px] rounded-r outline-none"
+                      name="email"
+                      placeholder="example@mail.com"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs"
+                      name="email"
+                      component="div"
                     />
                   </div>
-                </div>
-
-                {/* password */}
-                <div className="mt-4">
-                  <label
-                    className="text-xs font-medium flex justify-between mb-1 "
-                    htmlFor="password"
-                  >
-                    <span> Password</span>
-                  </label>
-                  <div className="flex">
-                    <div className="py-[7px] px-4 bg-white border rounded-l">
-                      <Lock size={18} color="#9b9b9b" />
-                    </div>
-                    <input
-                      autoComplete="off"
-                      autoCorrect="off"
+                  {/* Password */}
+                  <div className="flex flex-col mb-2">
+                    <label htmlFor="password">Password</label>
+                    <Field
+                      className="border outline-none px-1 text-sm py-2 rounded"
                       type="password"
                       id="password"
-                      placeholder="password"
-                      className="border w-full placeholder:text-xs px-2 text-xs py-[7px] rounded-r outline-none"
+                      name="password"
+                      placeholder="example@mail.com"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs"
+                      name="password"
+                      component="div"
                     />
                   </div>
-                </div>
-
-                {/* Confirm password */}
-                <div className="mt-4">
-                  <label
-                    className="text-xs font-medium flex justify-between mb-1 "
-                    htmlFor="confirm_password"
-                  >
-                    <span> Confirm Password</span>
-                  </label>
-                  <div className="flex">
-                    <div className="py-[7px] px-4 bg-white border rounded-l">
-                      <Lock size={18} color="#9b9b9b" />
-                    </div>
-                    <input
-                      autoComplete="off"
-                      autoCorrect="off"
+                  {/*  confirm  Password */}
+                  <div className="flex flex-col mb-2">
+                    <label htmlFor="confirm_password">Confirm Password</label>
+                    <Field
+                      className="border outline-none px-1 text-sm py-2 rounded"
                       type="password"
                       id="confirm_password"
+                      name="confirm_password"
                       placeholder="password"
-                      className="border w-full placeholder:text-xs px-2 text-xs py-[7px] rounded-r outline-none"
+                    />
+                    <ErrorMessage
+                      className="text-red-500 text-xs"
+                      name="confirm_password"
+                      component="div"
                     />
                   </div>
-                </div>
 
-                {/* Remember Me */}
-
-                {/* submit button */}
-                <button
-                  type="submit"
-                  className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-500/90 duration-150 ease-linear text-sm mt-6"
-                >
-                  Register
-                </button>
-              </form>
+                  <button
+                    className="bg-blue-500 w-full py-1 rounded text-white my-4"
+                    type="submit"
+                  >
+                    Register
+                  </button>
+                </Form>
+              </Formik>
             </div>
           </div>
 
-          <p className="text-center mt-4 md:mt-12 text-xs ">Or Login with</p>
+          <p className="text-center  text-xs ">Or Login with</p>
           <div className="flex  justify-center items-center space-x-4 mt-6">
             <button className="bg-white border shadow-sm text-gray-600 text-xs duration-300 ease-linear px-4 py-[5px] rounded hover:bg-gray-100">
               Google
