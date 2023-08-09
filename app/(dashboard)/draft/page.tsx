@@ -1,3 +1,5 @@
+"use client";
+
 import EmailTypes from "@/components/EmailTypes";
 import { TableUI } from "@/components/Table";
 
