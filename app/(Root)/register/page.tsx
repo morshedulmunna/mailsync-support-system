@@ -156,8 +156,8 @@ export default function RegisterPage({}: Props) {
             </div>
           </div>
 
-          <p className="text-center  text-xs ">Or Login with</p>
-          <div className="flex  justify-center items-center space-x-4 mt-6">
+          {/* <p className="text-center  text-xs ">Or Login with</p> */}
+          {/* <div className="flex  justify-center items-center space-x-4 mt-6">
             <button className="bg-white border shadow-sm text-gray-600 text-xs duration-300 ease-linear px-4 py-[5px] rounded hover:bg-gray-100">
               Google
             </button>
@@ -167,7 +167,7 @@ export default function RegisterPage({}: Props) {
             <button className="bg-white border shadow-sm text-gray-600 text-xs duration-300 ease-linear px-4 py-[5px] rounded hover:bg-gray-100">
               Github
             </button>
-          </div>
+          </div> */}
           <div className=" text-xs flex justify-center items-center mt-12">
             Do not have an account?{" "}
             <Link
