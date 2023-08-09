@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: Props) {
       route.push("/");
       return undefined;
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <div className="h-screen bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50">
