@@ -108,7 +108,7 @@ export default function Login({}: Props) {
                 className="bg-blue-500 w-full py-1 rounded text-white my-4"
                 type="submit"
               >
-                Register
+                Login
               </button>
             </Form>
           </Formik>
