@@ -1,11 +1,57 @@
+"use client";
+
 import { logo } from "@/assets";
-import { Lock, Mail } from "lucide-react";
+import { useLoginMutation } from "@/redux/auth/authApi";
+import { setCredentials } from "@/redux/auth/authSlice";
+import { loginUserSchema } from "@/types";
+import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 type Props = {};
 
 export default function Login({}: Props) {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [login, { data, error, isLoading }] = useLoginMutation();
+
+  const handleSubmit = (
+    values: FormikValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    const object = {
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      dispatch<any>(login(object));
+    } catch (err) {}
+    resetForm();
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    toast.error("Something Wrong!");
+  }
+  if (data) {
+    dispatch(setCredentials({ ...data }));
+    router.push("/inbox");
+    toast.success("Login Success!");
+  }
+
   return (
     <div className="bg-gradient-to-bl from-lime-50/70 overflow-hidden via-sky-50/70 bg-opacity-20 to-cyan-50/70 shadow-sm rounded-md px-24 m-4 py-6   w-fit    border">
       <div className="text-center mb-12 flex justify-center items-center">
@@ -19,67 +65,53 @@ export default function Login({}: Props) {
               Enter your email address and password to access admin panel.
             </p>
           </div>
-          <form className="text-gray-700" action="">
-            {/* Email Filed */}
-            <div className="mt-6">
-              <label className="text-xs font-medium mb-1 block" htmlFor="email">
-                Email Address
-              </label>
-              <div className="flex">
-                <div className="py-[7px] px-4 bg-white border rounded-l">
-                  <Mail size={18} color="#9b9b9b" />
-                </div>
-                <input
+          <Formik
+            initialValues={initialValues}
+            validationSchema={loginUserSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              {/* Email address */}
+              <div className="flex flex-col mb-2">
+                <label htmlFor="email">Email Address</label>
+                <Field
+                  className="border outline-none px-1 text-sm py-2 rounded"
                   type="text"
                   id="email"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  placeholder="example@gmail.com"
-                  className="border w-full placeholder:text-xs px-2 text-xs py-[7px] rounded-r outline-none"
+                  name="email"
+                  placeholder="example@mail.com"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs"
+                  name="email"
+                  component="div"
                 />
               </div>
-            </div>
-
-            {/* password */}
-            <div className="mt-4">
-              <label
-                className="text-xs font-medium flex justify-between mb-1 "
-                htmlFor="password"
-              >
-                <span> Password</span>
-                <span className="font-normal underline hover:text-blue-500 cursor-pointer decoration-dashed">
-                  Forgot your password?
-                </span>
-              </label>
-              <div className="flex">
-                <div className="py-[7px] px-4 bg-white border rounded-l">
-                  <Lock size={18} color="#9b9b9b" />
-                </div>
-                <input
-                  autoComplete="off"
-                  autoCorrect="off"
+              {/* Password */}
+              <div className="flex flex-col mb-2">
+                <label htmlFor="password">Password</label>
+                <Field
+                  className="border outline-none px-1 text-sm py-2 rounded"
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="password"
-                  className="border w-full placeholder:text-xs px-2 text-xs py-[7px] rounded-r outline-none"
+                />
+                <ErrorMessage
+                  className="text-red-500 text-xs"
+                  name="password"
+                  component="div"
                 />
               </div>
-            </div>
 
-            {/* Remember Me */}
-            <div className="text-xs flex  mt-4 space-x-2 ">
-              <input type="checkbox" id="remember" className="bg-blue-500" />
-              <label htmlFor="remember">Remember me</label>
-            </div>
-
-            {/* submit button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded  text-sm mt-6"
-            >
-              Log In
-            </button>
-          </form>
+              <button
+                className="bg-blue-500 w-full py-1 rounded text-white my-4"
+                type="submit"
+              >
+                Register
+              </button>
+            </Form>
+          </Formik>
         </div>
       </div>
 

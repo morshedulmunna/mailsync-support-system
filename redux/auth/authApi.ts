@@ -1,11 +1,19 @@
 import { apiSlice } from "@/redux/api/apiSlice";
-import { FormikValues } from "formik";
+import { registerCredential } from "@/types";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation({
-      query: (data: FormikValues) => ({
+    createRegister: builder.mutation<any, any>({
+      query: (data: registerCredential) => ({
         url: "/auth/local/signup",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    login: builder.mutation<any, any>({
+      query: (data: any) => ({
+        url: "/auth/local/signin",
         method: "POST",
         body: data,
       }),
@@ -13,4 +21,4 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useRegisterMutation } = authApi;
+export const { useCreateRegisterMutation, useLoginMutation } = authApi;

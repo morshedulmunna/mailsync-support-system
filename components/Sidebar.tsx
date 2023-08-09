@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { logOut } from "@/redux/auth/authSlice";
 import {
   Inbox,
   MailCheck,
@@ -19,6 +20,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button } from "./ui/button";
 
 type Props = {};
@@ -63,7 +65,7 @@ export const navItem = [
 
 export default function Sidebar({}: Props) {
   const pathname = usePathname();
-
+  const dispatch = useDispatch();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -148,7 +150,10 @@ export default function Sidebar({}: Props) {
             </PopoverTrigger>
             <PopoverContent>
               <div className=" flex flex-col space-y-4 p-2 w-fit">
-                <button className="text-sm duration-300 ease-linear hover:bg-red-500/80 hover:text-white rounded px-4 py-1">
+                <button
+                  onClick={() => dispatch(logOut())}
+                  className="text-sm duration-300 ease-linear hover:bg-red-500/80 hover:text-white rounded px-4 py-1"
+                >
                   log out
                 </button>
               </div>

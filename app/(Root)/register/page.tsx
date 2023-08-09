@@ -1,11 +1,16 @@
 "use client";
+
 import { logo } from "@/assets";
-import { useRegisterMutation } from "@/redux/auth/authApi";
+import Loading from "@/components/Loading";
+import { useCreateRegisterMutation } from "@/redux/auth/authApi";
+import { setCredentials } from "@/redux/auth/authSlice";
 import { registerUserSchema } from "@/types";
 import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -16,18 +21,39 @@ export default function RegisterPage({}: Props) {
     password: "",
   };
   const dispatch = useDispatch();
-  const [register, { data, error, isLoading }] = useRegisterMutation();
+  const router = useRouter();
 
-  console.log(data);
+  const [createRegister, { data, error, isLoading }] =
+    useCreateRegisterMutation();
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = (
+    values: FormikValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
     const object = {
       name: values.name,
       email: values.email,
       password: values.password,
     };
-    // dispatch(register(object));
+
+    try {
+      dispatch<any>(createRegister(object));
+    } catch (err) {}
+    resetForm();
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    toast.error("Something Wrong!");
+  }
+  if (data) {
+    dispatch(setCredentials({ ...data }));
+    router.push("/inbox");
+    toast.success("Register Success!");
+  }
 
   return (
     <>
@@ -94,7 +120,7 @@ export default function RegisterPage({}: Props) {
                       type="password"
                       id="password"
                       name="password"
-                      placeholder="example@mail.com"
+                      placeholder="password"
                     />
                     <ErrorMessage
                       className="text-red-500 text-xs"

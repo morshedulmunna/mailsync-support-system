@@ -1,6 +1,8 @@
 import Providers from "@/redux/Providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +25,7 @@ export default function RootLayout({
       <Providers>
         <body className={` overflow-auto h-screen ${inter.className}`}>
           {children}
+          <ToastContainer />
         </body>
       </Providers>
     </html>

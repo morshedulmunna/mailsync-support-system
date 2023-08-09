@@ -4,10 +4,12 @@ import EmailTopBar from "@/components/EmailTopBar";
 import PageTitle from "@/components/PageTitle";
 import { SheetSidebar } from "@/components/SheetSidebar";
 import Sidebar from "@/components/Sidebar";
+import { RootState } from "@/redux/store";
 import { Menu } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useSelector } from "react-redux";
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +18,15 @@ type Props = {
 export default function DashboardLayout({ children }: Props) {
   const pathName = usePathname();
   const date = new Date();
+  const route = useRouter();
+  const isAuth: any = useSelector<RootState>(
+    (state) => state.auth.isAuthenticated
+  );
+
+  if (!isAuth) {
+    route.push("/");
+    return undefined;
+  }
 
   return (
     <div className="h-screen bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50">
