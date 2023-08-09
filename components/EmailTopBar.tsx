@@ -5,7 +5,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { Dropdown } from "./DropDown";
-import { Input } from "./ui/input";
 
 type Props = {};
 
@@ -55,11 +54,11 @@ export default function EmailTopBar({}: Props) {
         />
       </div>
 
-      <Input
+      {/* <Input
         type="search"
         className="w-full text-sm h-9 mb-4"
         placeholder="Search....."
-      />
+      /> */}
     </div>
   );
 }
