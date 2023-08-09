@@ -7,7 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import { RootState } from "@/redux/store";
 import { Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useSelector } from "react-redux";
 
@@ -23,10 +23,12 @@ export default function DashboardLayout({ children }: Props) {
     (state) => state.auth.isAuthenticated
   );
 
-  if (!isAuth) {
-    route.push("/");
-    return undefined;
-  }
+  useEffect(() => {
+    if (!isAuth) {
+      route.push("/");
+      return undefined;
+    }
+  }, []);
 
   return (
     <div className="h-screen bg-gradient-to-bl from-emerald-50 via-red-50 to-orange-50">
