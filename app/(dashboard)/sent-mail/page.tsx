@@ -7,7 +7,6 @@ import { useSendingEmailQuery } from "@/redux/email/emailApi";
 import { sentEmail } from "@/redux/email/emailSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -41,9 +40,6 @@ export default function SentEmail({}: Props) {
 
   if (isLoading) {
     <Loading />;
-  }
-  if (error) {
-    toast.error("Something Wrong!");
   }
 
   return (

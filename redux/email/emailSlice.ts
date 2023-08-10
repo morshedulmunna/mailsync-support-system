@@ -10,12 +10,9 @@ const emailSlice = createSlice({
   initialState,
   reducers: {
     inbox: (state, action) => {
-      console.log(action.payload);
-
       state.inbox = action.payload;
     },
     sentEmail: (state, action) => {
-      console.log(action.payload);
       state.sentMail = action.payload;
     },
   },

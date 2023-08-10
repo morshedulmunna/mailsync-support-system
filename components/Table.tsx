@@ -25,7 +25,6 @@ export function TableUI({ data }: Props) {
   if (!isMounted) {
     return null;
   }
-  console.log(data);
 
   return (
     <div className="rounded  overflow-x-scroll  bg-white p-2 mt-2 ">

@@ -7,7 +7,6 @@ import { useInboxEmailQuery } from "@/redux/email/emailApi";
 import { inbox } from "@/redux/email/emailSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -36,9 +35,6 @@ export default function Inbox({}: Props) {
 
   if (isLoading) {
     <Loading />;
-  }
-  if (error) {
-    toast.error("Something Wrong!");
   }
 
   const dispatch = useDispatch();
