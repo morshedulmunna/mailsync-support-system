@@ -1,22 +1,50 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { usePostEmailMutation } from "@/redux/email/emailApi";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 export default function Compose({}: Props) {
-  const [editorState, setEditorState] = useState<any>();
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
 
-  console.log(editorState);
+  const [postEmail, { data, error, isSuccess, isLoading, isError, status }] =
+    usePostEmailMutation();
 
   /**
    * On editor body change
    */
-  const onEditorStateChange = (editorStates: any) => {
-    setEditorState(editorStates);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const object = {
+      sendingEmail: email,
+      subject,
+      body,
+    };
+
+    setEmail("");
+    setSubject("");
+    setBody("");
+    postEmail(object);
   };
+
+  if (isLoading) {
+    <Loading />;
+  }
+  if (isError) {
+    toast.error("Something Wrong!");
+    console.log(error);
+  }
+
+  if (isSuccess) {
+    toast.success("Your message has been sent successfully!");
+  }
 
   return (
     <div className="p-6 overflow-hidden  ">
@@ -27,11 +55,13 @@ export default function Compose({}: Props) {
             Email Address
           </label>
           <Input
+            onChange={(e) => setEmail(e.target.value)}
             type="text"
             id="email"
             name="email"
+            value={email}
             className="outline-none focus:outline-none placeholder:text-gray-300"
-            placeholder="Typing Subject"
+            placeholder="Email Address"
           />
         </div>
         {/* Email */}
@@ -41,7 +71,9 @@ export default function Compose({}: Props) {
             Subject
           </label>
           <Input
+            onChange={(e) => setSubject(e.target.value)}
             type="text"
+            value={subject}
             id="subject"
             name="subject"
             className="outline-none focus:outline-none placeholder:text-gray-300"
@@ -57,6 +89,8 @@ export default function Compose({}: Props) {
             Problem Details
           </label>
           <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
             className="border w-full text-sm p-2 rounded outline-none"
             placeholder="Write your problem Details......."
             name="description"
@@ -78,6 +112,7 @@ export default function Compose({}: Props) {
             <Button
               className="px-12 bg-red-500 hover:bg-red-500/80 "
               type="submit"
+              onClick={handleSubmit}
             >
               Send
             </Button>
