@@ -1,124 +1,136 @@
 "use client";
 
 import Loading from "@/components/Loading";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { usePostEmailMutation } from "@/redux/email/emailApi";
-import { useState } from "react";
+import { emailSchema } from "@/types";
+import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import { toast } from "react-toastify";
 
 type Props = {};
 
 export default function Compose({}: Props) {
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-
   const [postEmail, { data, error, isSuccess, isLoading, isError, status }] =
     usePostEmailMutation();
 
-  /**
-   * On editor body change
-   */
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const object = {
-      sendingEmail: email,
-      subject,
-      body,
+  console.log(error);
+
+  const initialValues = {
+    email: "",
+    subject: "",
+    body: "",
+  };
+
+  const handleSubmit = (
+    values: FormikValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    const obj = {
+      sendingEmail: values.email,
+      subject: values.subject,
+      body: values.body,
     };
 
-    setEmail("");
-    setSubject("");
-    setBody("");
-    postEmail(object);
+    console.log(obj);
+
+    postEmail(obj);
+
+    resetForm();
   };
 
   if (isLoading) {
     <Loading />;
   }
-  if (isError) {
+
+  if (error) {
     toast.error("Something Wrong!");
-    console.log(error);
   }
 
-  if (isSuccess) {
-    toast.success("Your message has been sent successfully!");
+  if (data) {
+    toast.success("Email Sent Successfully!");
   }
+
+  /**
+   * On editor body change
+   */
 
   return (
     <div className="p-6 overflow-hidden  ">
-      <form action="">
-        {/* Email */}
-        <div className="bg-white p-4 mb-5 rounded">
-          <label className="text-sm pb-1  block" htmlFor="email">
-            Email Address
-          </label>
-          <Input
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            id="email"
-            name="email"
-            value={email}
-            className="outline-none focus:outline-none placeholder:text-gray-300"
-            placeholder="Email Address"
-          />
-        </div>
-        {/* Email */}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={emailSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form className="shadow p-3 rounded-md">
+          {/* Email address */}
+          <div className="flex flex-col mb-2 text-sm text-gray-600">
+            <label htmlFor="email">Email Address</label>
+            <Field
+              className="border mt-1 outline-none px-1 text-sm py-2 rounded"
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Email address"
+            />
+            <ErrorMessage
+              className="text-red-500 text-xs"
+              name="email"
+              component="div"
+            />
+          </div>
+          {/* Subject */}
+          <div className="flex flex-col mb-2 text-sm text-gray-600">
+            <label htmlFor="subject">Subject</label>
+            <Field
+              className="border mt-1 outline-none px-1 text-sm py-2 rounded"
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+            />
+            <ErrorMessage
+              className="text-red-500 text-xs"
+              name="subject"
+              component="div"
+            />
+          </div>
 
-        <div className="bg-white p-4 rounded">
-          <label className="text-sm pb-1  block" htmlFor="subject">
-            Subject
-          </label>
-          <Input
-            onChange={(e) => setSubject(e.target.value)}
-            type="text"
-            value={subject}
-            id="subject"
-            name="subject"
-            className="outline-none focus:outline-none placeholder:text-gray-300"
-            placeholder="Typing Subject"
-          />
-        </div>
+          {/* area text */}
+          <div className="flex flex-col mb-2 text-sm text-gray-600">
+            <label htmlFor="body">Email Body </label>
+            <Field
+              as="textarea"
+              rows={10}
+              cols={3}
+              className={
+                "resize-none mt-1 outline-none p-2 text-sm py-2 rounded"
+              }
+              placeholder="type problem details"
+              id="body"
+              name="body"
+            />
+            <ErrorMessage
+              name="body"
+              className="text-red-500 text-xs"
+              component="div"
+            />
+          </div>
 
-        {/* Category */}
-
-        {/* Text Box */}
-        <div className="bg-white p-4 rounded mt-4">
-          <label className="text-sm pb-1  block" htmlFor="email">
-            Problem Details
-          </label>
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            className="border w-full text-sm p-2 rounded outline-none"
-            placeholder="Write your problem Details......."
-            name="description"
-            id=""
-            cols={20}
-            rows={10}
-          ></textarea>
-        </div>
-
-        <div className="mt-6 bg-white rounded">
-          <div className="space-x-4  float-right mt-4">
-            <Button
-              className="px-12 bg-blue-500 hover:bg-blue-500/80"
+          <div className="flex justify-end space-x-4">
+            {/* <button
+              className="bg-orange-500 hover:bg-orange-500/50 w-fit px-4 py-1 rounded text-white my-4"
               type="submit"
             >
               Draft
-            </Button>
-
-            <Button
-              className="px-12 bg-red-500 hover:bg-red-500/80 "
+            </button> */}
+            <button
+              className="bg-red-500 hover:bg-red-500/50 w-fit px-4 py-1 rounded text-white my-4"
               type="submit"
-              onClick={handleSubmit}
             >
-              Send
-            </Button>
+              Send Email
+            </button>
           </div>
-        </div>
-      </form>
+        </Form>
+      </Formik>
     </div>
   );
 }

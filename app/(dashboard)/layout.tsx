@@ -1,6 +1,5 @@
 "use client";
 
-import EmailTopBar from "@/components/EmailTopBar";
 import PageTitle from "@/components/PageTitle";
 import { SheetSidebar } from "@/components/SheetSidebar";
 import Sidebar from "@/components/Sidebar";
@@ -53,9 +52,8 @@ export default function DashboardLayout({ children }: Props) {
           </div>
 
           <main className=" h-full  bg-gray-200/20 rounded-r lg:shadow overflow-hidden flex flex-col justify-between   w-full">
-            <div className="px-6 pt-6">
-              <EmailTopBar />
-            </div>
+            {/* TODO:TopBar working  */}
+            <div className="px-6 pt-6">{/* <EmailTopBar /> */}</div>
             <div className="overflow-y-scroll h-full">{children}</div>
             <footer>
               <nav className="bg-gray-100  flex justify-center items-center">

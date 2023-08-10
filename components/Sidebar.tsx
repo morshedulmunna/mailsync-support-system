@@ -7,66 +7,67 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { logOut } from "@/redux/auth/authSlice";
-import {
-  Inbox,
-  MailCheck,
-  MailWarning,
-  Mails,
-  MenuSquare,
-  MessagesSquare,
-  Settings,
-  Trash2,
-} from "lucide-react";
+import { RootState } from "@/redux/store";
+import { MailCheck, MessagesSquare, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./ui/button";
 
 type Props = {};
-
-export const navItem = [
-  {
-    icon: <MessagesSquare size={16} />,
-    level: "Inbox",
-    href: "/inbox",
-  },
-  {
-    icon: <Mails size={16} />,
-    level: "Unread",
-    href: "/unread",
-  },
-  {
-    icon: <Inbox size={16} />,
-    level: "Important",
-    href: "/important",
-  },
-  {
-    icon: <MailCheck size={16} />,
-    level: "Sent Mail",
-    href: "/sent-mail",
-  },
-  {
-    icon: <MenuSquare size={16} />,
-    level: "Draft",
-    href: "/draft",
-  },
-  {
-    icon: <MailWarning size={16} />,
-    level: "Spam",
-    href: "/spam",
-  },
-  {
-    icon: <Trash2 size={16} />,
-    level: "Trash",
-    href: "/trash",
-  },
-];
 
 export default function Sidebar({}: Props) {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const [isMounted, setIsMounted] = useState(false);
+
+  const countNumberOfSentMail = useSelector(
+    (state: RootState) => state.email.sentMail
+  );
+  const countNumberOfInbox = useSelector(
+    (state: RootState) => state.email.inbox
+  );
+
+  const navItems = [
+    {
+      icon: <MessagesSquare size={16} />,
+      level: "Inbox",
+      href: "/inbox",
+      count: countNumberOfInbox,
+    },
+    // {
+    //   icon: <Mails size={16} />,
+    //   level: "Unread",
+    //   href: "/unread",
+    // },
+    // {
+    //   icon: <Inbox size={16} />,
+    //   level: "Important",
+    //   href: "/important",
+    // },
+    {
+      icon: <MailCheck size={16} />,
+      level: "Sent Mail",
+      href: "/sent-mail",
+      count: countNumberOfSentMail,
+    },
+    // {
+    //   icon: <MenuSquare size={16} />,
+    //   level: "Draft",
+    //   href: "/draft",
+    // },
+    // {
+    //   icon: <MailWarning size={16} />,
+    //   level: "Spam",
+    //   href: "/spam",
+    // },
+    // {
+    //   icon: <Trash2 size={16} />,
+    //   level: "Trash",
+    //   href: "/trash",
+    // },
+  ];
 
   useEffect(() => {
     setIsMounted(true);
@@ -103,7 +104,7 @@ export default function Sidebar({}: Props) {
       {/* Mene Item */}
       <div>
         <ul>
-          {navItem.map((navItem, indx) => (
+          {navItems?.map((navItem, indx) => (
             <li
               key={indx}
               className={cn(
@@ -129,7 +130,7 @@ export default function Sidebar({}: Props) {
                     pathname === navItem.href && "bg-red-500/50 text-white"
                   )}
                 >
-                  12
+                  {navItem?.count}
                 </span>
               </Link>
             </li>

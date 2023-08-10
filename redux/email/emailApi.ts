@@ -12,13 +12,22 @@ export const emailApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["create_email"],
     }),
 
-    sendingEmail: builder.query<any, void>({
-      query: () => `/email/sending?skip=0&take=20`,
-      providesTags: [],
+    sendingEmail: builder.query<any, any>({
+      query: ({ skip, take }) => `/email/sending?skip=${skip}&take=${take}`,
+      providesTags: ["create_email"],
+    }),
+    inboxEmail: builder.query<any, any>({
+      query: ({ skip, take }) => `/email/inbox?skip=${skip}&take=${take}`,
+      providesTags: ["create_email"],
     }),
   }),
 });
 
-export const { usePostEmailMutation, useSendingEmailQuery } = emailApi;
+export const {
+  usePostEmailMutation,
+  useSendingEmailQuery,
+  useInboxEmailQuery,
+} = emailApi;

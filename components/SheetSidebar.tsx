@@ -7,10 +7,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { MailCheck, MessagesSquare } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { navItem } from "./Sidebar";
 import { Button } from "./ui/button";
 
 interface sheetBadType {
@@ -30,6 +30,44 @@ export function SheetSidebar({ button }: sheetBadType) {
     return null;
   }
 
+  const navItems = [
+    {
+      icon: <MessagesSquare size={16} />,
+      level: "Inbox",
+      href: "/inbox",
+    },
+    // {
+    //   icon: <Mails size={16} />,
+    //   level: "Unread",
+    //   href: "/unread",
+    // },
+    // {
+    //   icon: <Inbox size={16} />,
+    //   level: "Important",
+    //   href: "/important",
+    // },
+    {
+      icon: <MailCheck size={16} />,
+      level: "Sent Mail",
+      href: "/sent-mail",
+    },
+    // {
+    //   icon: <MenuSquare size={16} />,
+    //   level: "Draft",
+    //   href: "/draft",
+    // },
+    // {
+    //   icon: <MailWarning size={16} />,
+    //   level: "Spam",
+    //   href: "/spam",
+    // },
+    // {
+    //   icon: <Trash2 size={16} />,
+    //   level: "Trash",
+    //   href: "/trash",
+    // },
+  ];
+
   return (
     <Sheet>
       <SheetTrigger asChild>{button}</SheetTrigger>
@@ -45,7 +83,7 @@ export function SheetSidebar({ button }: sheetBadType) {
             </Button>
           </Link>
         </SheetClose>
-        {navItem.map((navItem, indx) => (
+        {navItems.map((navItem, indx) => (
           <SheetClose key={indx} asChild>
             {/* <div
               key={indx}

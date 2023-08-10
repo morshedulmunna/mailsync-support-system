@@ -2,23 +2,44 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Props = {
   types: string;
-  take: number;
-  skip: number;
+  currentPage: number;
+  pageSize: number;
+  handleNextPage: () => void;
+  handlePrevPage: () => void;
 };
 
-export default function EmailTypes({ types, take, skip }: Props) {
+export default function EmailTypes({
+  types,
+  currentPage,
+  pageSize,
+  handleNextPage,
+  handlePrevPage,
+}: Props) {
   return (
     <div className="text-sm text-red-500 flex flex-col md:flex-row justify-between md:items-center">
       <span className="font-medium">{types}</span>
       <div className="flex items-center">
-        <p className="text-xs">
-          Showing <span>{take}</span> - <span>{skip}</span> of <span>100</span>
-        </p>
+        <button className="text-xs">
+          Page: {currentPage}
+          <span>/{pageSize}</span>
+        </button>
         <div className="pl-4 ">
-          <button className="bg-white text-black shadow-sm  hover:bg-gray-100/80 duration-200 ease-linear px-1 rounded-l-[4px] border border-gray-100">
+          <button
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+            className={` text-black shadow-sm  duration-200 ease-linear px-1 rounded-l-[4px] border border-gray-100 ${
+              currentPage >= 2 && "bg-red-500 text-white"
+            } `}
+          >
             <ChevronLeft size={18} />
           </button>
-          <button className="bg-red-500 hover:bg-red-500/80 duration-200 ease-linear text-white border border-gray-100 px-1 rounded-r-[4px]">
+          <button
+            disabled={pageSize <= currentPage}
+            onClick={handleNextPage}
+            className={` text-black shadow-sm  duration-200 ease-linear px-1 rounded-l-[4px] border border-gray-100 ${
+              pageSize > currentPage && "bg-red-500 text-white"
+            } `}
+          >
             <ChevronRight size={18} />
           </button>
         </div>
