@@ -32,7 +32,7 @@ export default function Inbox({}: Props) {
       take,
     },
     {
-      refetchOnMountOrArgChange: true,
+      pollingInterval: 500,
     }
   );
   const totalItems = data?.count;
