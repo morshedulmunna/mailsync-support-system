@@ -47,7 +47,7 @@ export function TableUI({ data }: Props) {
             <div className="col-span-1 text-xs">{formatDate(item?.sentAt)}</div>
           </Link> */}
 
-          <div>
+          <div className="col-span-11 grid grid-cols-12">
             <div className="col-span-3 "> {item.subject} </div>
             <div className="col-span-8 text-[13px] text-gray-500 ">
               {item.body.slice(0, 90)}.....
