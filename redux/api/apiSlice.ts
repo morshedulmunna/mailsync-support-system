@@ -40,5 +40,6 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: baseQuery,
   tagTypes: ["create_email"],
+
   endpoints: (builder) => ({}),
 });
