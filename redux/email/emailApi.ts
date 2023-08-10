@@ -17,11 +17,9 @@ export const emailApi = apiSlice.injectEndpoints({
 
     sendingEmail: builder.query<any, any>({
       query: ({ skip, take }) => `/email/sending?skip=${skip}&take=${take}`,
-      providesTags: ["create_email"],
     }),
     inboxEmail: builder.query<any, any>({
       query: ({ skip, take }) => `/email/inbox?skip=${skip}&take=${take}`,
-      providesTags: ["create_email"],
     }),
   }),
 });
