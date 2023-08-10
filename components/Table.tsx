@@ -2,7 +2,6 @@
 
 import { formatDate } from "@/lib/timeFunction";
 import { Star } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 type Props = {
   data:
@@ -40,13 +39,21 @@ export function TableUI({ data }: Props) {
             </button>
           </div>
 
-          <Link className="col-span-11 grid grid-cols-12" href={"/inbox/32"}>
+          {/* <Link className="col-span-11 grid grid-cols-12" href={"/inbox/32"}>
             <div className="col-span-3 "> {item.subject} </div>
             <div className="col-span-8 text-[13px] text-gray-500 ">
               {item.body.slice(0, 90)}.....
             </div>
             <div className="col-span-1 text-xs">{formatDate(item?.sentAt)}</div>
-          </Link>
+          </Link> */}
+
+          <div>
+            <div className="col-span-3 "> {item.subject} </div>
+            <div className="col-span-8 text-[13px] text-gray-500 ">
+              {item.body.slice(0, 90)}.....
+            </div>
+            <div className="col-span-1 text-xs">{formatDate(item?.sentAt)}</div>
+          </div>
         </div>
       ))}
     </div>
