@@ -26,15 +26,10 @@ export default function SentEmail({}: Props) {
   let skip = (currentPage - 1) * itemsPerPage;
   let take = itemsPerPage;
   // Assuming data is an array of items
-  const { data, isLoading, error } = useSendingEmailQuery(
-    {
-      skip,
-      take,
-    },
-    {
-      refetchOnFocus: true,
-    }
-  );
+  const { data, isLoading, error } = useSendingEmailQuery({
+    skip,
+    take,
+  });
   const totalItems = data?.count;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
