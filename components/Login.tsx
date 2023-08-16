@@ -34,9 +34,26 @@ export default function Login({}: Props) {
     };
 
     try {
-      dispatch<any>(login(object));
+      login(object);
     } catch (err) {}
     resetForm();
+  };
+
+  const User1LoginHandler = async () => {
+    const object = {
+      email: "testuser1@gmail.com",
+      password: "testuser1",
+    };
+
+    await login(object);
+  };
+  const User2LoginHandler = async () => {
+    const object = {
+      email: "testuser2@gmail.com",
+      password: "testuser2",
+    };
+
+    await login(object);
   };
 
   if (isLoading) {
@@ -128,6 +145,25 @@ export default function Login({}: Props) {
           Github
         </button>
       </div> */}
+
+      <div>
+        <p className="mb-2 font-semibold underline">
+          Testing Purpose for Click and login
+        </p>
+        <button
+          onClick={User1LoginHandler}
+          className="block hover:underline hover:text-blue-500"
+        >
+          🚀 User 1 Login
+        </button>
+        <button
+          onClick={User2LoginHandler}
+          className="block hover:underline mt-2 hover:text-blue-500"
+        >
+          🎇 User 2 Login
+        </button>
+      </div>
+
       <div className=" text-xs flex justify-center items-center mt-12">
         Do not have an account?
         <Link
