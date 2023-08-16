@@ -10,9 +10,7 @@ type Props = {};
 
 export default function Compose({}: Props) {
   const [postEmail, { data, error, isSuccess, isLoading, isError, status }] =
-    usePostEmailMutation();
-
-  console.log(error);
+    usePostEmailMutation<any>();
 
   const initialValues = {
     email: "",
@@ -42,7 +40,7 @@ export default function Compose({}: Props) {
   }
 
   if (error) {
-    toast.error("Something Wrong!");
+    toast.error(error?.data?.message);
   }
 
   if (data) {

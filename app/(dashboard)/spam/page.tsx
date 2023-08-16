@@ -27,7 +27,7 @@ export default function Spam({}: Props) {
   let skip = (currentPage - 1) * itemsPerPage;
   let take = itemsPerPage;
   // Assuming data is an array of items
-  const { data, isLoading, error } = useInboxEmailQuery({
+  const { data, isLoading, error } = useInboxEmailQuery<any>({
     skip,
     take,
   });
@@ -38,7 +38,7 @@ export default function Spam({}: Props) {
     <Loading />;
   }
   if (error) {
-    toast.error("Something Wrong!");
+    toast.error(error?.data?.message);
   }
 
   const dispatch = useDispatch();

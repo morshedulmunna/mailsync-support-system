@@ -22,7 +22,7 @@ export default function Login({}: Props) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [login, { data, error, isLoading }] = useLoginMutation();
+  const [login, { data, error, isLoading }] = useLoginMutation<any>();
 
   const handleSubmit = (
     values: FormikValues,
@@ -43,13 +43,14 @@ export default function Login({}: Props) {
     return <Loading />;
   }
 
-  if (error) {
-    toast.error("Something Wrong!");
-  }
   if (data) {
     dispatch(setCredentials({ ...data }));
     router.push("/inbox");
     toast.success("Login Success!");
+  }
+
+  if (error) {
+    toast.error(error?.data?.message);
   }
 
   return (

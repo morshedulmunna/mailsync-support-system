@@ -7,6 +7,7 @@ import { useInboxEmailQuery } from "@/redux/email/emailApi";
 import { inbox } from "@/redux/email/emailSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -26,7 +27,7 @@ export default function Inbox({}: Props) {
   let skip = (currentPage - 1) * itemsPerPage;
   let take = itemsPerPage;
   // Assuming data is an array of items
-  const { data, isLoading, error } = useInboxEmailQuery(
+  const { data, isLoading, error } = useInboxEmailQuery<any>(
     {
       skip,
       take,
@@ -40,6 +41,10 @@ export default function Inbox({}: Props) {
 
   if (isLoading) {
     <Loading />;
+  }
+
+  if (error) {
+    toast.error(error?.data?.message);
   }
 
   const dispatch = useDispatch();

@@ -24,7 +24,7 @@ export default function RegisterPage({}: Props) {
   const router = useRouter();
 
   const [createRegister, { data, error, isLoading }] =
-    useCreateRegisterMutation();
+    useCreateRegisterMutation<any>();
 
   const handleSubmit = (
     values: FormikValues,
@@ -47,8 +47,9 @@ export default function RegisterPage({}: Props) {
   }
 
   if (error) {
-    toast.error("Something Wrong!");
+    toast.error(error?.data?.message);
   }
+
   if (data) {
     dispatch(setCredentials({ ...data }));
     router.push("/inbox");
